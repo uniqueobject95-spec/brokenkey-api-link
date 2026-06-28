@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  other: {
+    'base:app_id': '69e7b2676ced5c904f61964c',
+  },
+}
+
 const ENDPOINT_PATH = "/api/brokenkeyremapperlink"
 
 const DETAILS = [
