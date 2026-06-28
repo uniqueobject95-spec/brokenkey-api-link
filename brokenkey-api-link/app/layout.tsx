@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: 'Broken Key Remapper — x402 Endpoint',
   description: 'Pay 0.001 USDC on Base mainnet via x402 to download the Broken Key Remapper software.',
   generator: 'v0.app',
+  other: {
+    'base:app_id': '69e7b2676ced5c904f61964c',
+  },
   icons: {
     icon: [
       {
