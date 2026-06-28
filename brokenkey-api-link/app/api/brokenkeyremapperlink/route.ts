@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { withX402 } from "@x402/next"
-import { declareBuilderCodeExtension } from "@x402/extensions/builder-code"
+import { declareBuilderCodeExtension, BUILDER_CODE as BUILDER_CODE_EXTENSION_KEY } from "@x402/extensions/builder-code"
 import { declareDiscoveryExtension } from "@x402/extensions/bazaar"
 import { resourceServer, BASE_MAINNET, PAY_TO_ADDRESS, PRICE, BUILDER_CODE } from "@/lib/x402"
 
@@ -42,7 +42,10 @@ export const GET = withX402(
     tags: ["software", "download", "utility", "keyboard"],
     // ERC-8021 Builder Code attribution ("a" app code) on every settlement.
     extensions: {
-      ...declareBuilderCodeExtension(BUILDER_CODE),
+      // Must be keyed under the "builder-code" extension id so the resource
+      // server declares it and the CDP facilitator appends the ERC-8021 suffix
+      // (the "a" app code) to the settlement transaction calldata.
+      [BUILDER_CODE_EXTENSION_KEY]: declareBuilderCodeExtension(BUILDER_CODE),
       // Bazaar discovery metadata: tells agents how to call this endpoint.
       ...declareDiscoveryExtension({
         output: {
